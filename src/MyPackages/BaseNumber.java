@@ -23,17 +23,22 @@ public class BaseNumber {
         this.number = number;
         this.base = base;
 
+        if(number.matches(".*[a-zG-Z].*")){
+            throw new WrongBaseFormatException("wrong characters, valid characters are A to F");
+        }
         for(int i = 0 ; i < number.length() ; i++){
-            /*if (Character.getNumericValue(number.charAt(i)) >= Integer.parseInt(base)){
-                throw new WrongBaseFormatException("Please change number or its base.");*/
             if( hashMap.get(number.charAt(i)) >= Integer.parseInt(base)){
                 throw new WrongBaseFormatException("Some digits of number is more than its base");
             }
         }
     }
-    public BaseNumber(String number){
+    public BaseNumber(String number) throws WrongBaseFormatException {
         this.number = number;
         this.base = "10";
+
+        if(number.matches(".*[a-zA-Z].*")){
+            throw new WrongBaseFormatException("for decimal numbers you should enter characters between 0 to 9");
+        }
     }
 
     /**
@@ -44,7 +49,6 @@ public class BaseNumber {
         int sum = 0;
 
         for (int i = number.length() - 1 ; i >= 0 ; i--){
-           // sum += Character.getNumericValue(number.charAt(i)) * Math.pow(Integer.parseInt(base), number.length() -1 - i);
             sum += hashMap.get(number.charAt(i)) * Math.pow(Integer.parseInt(base), number.length() - 1 - i);
         }
         this.number = String.valueOf(sum);
@@ -61,11 +65,9 @@ public class BaseNumber {
     public String convertToBase(String base){
         int baseOfNumber = Integer.valueOf(base);
         int number = Integer.parseInt(convertToBaseTen());
-        //Stack<String> stack = new Stack<>();
         Stack<Character> stack = new Stack<>();
 
         while(number != 0) {
-            //stack.push(String.valueOf(number % baseOfNumber));
             for (Map.Entry<Character, Integer> entry : hashMap.entrySet()) {
                 if (entry.getValue() == number % baseOfNumber) {
                     stack.push(entry.getKey());
@@ -88,8 +90,17 @@ public class BaseNumber {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(String number) throws WrongBaseFormatException {
         this.number = number;
+
+        if(number.matches(".*[a-zG-Z].*")){
+            throw new WrongBaseFormatException("wrong characters, valid characters are A to F");
+        }
+        for(int i = 0 ; i < number.length() ; i++){
+            if( hashMap.get(number.charAt(i)) >= Integer.parseInt(base)){
+                throw new WrongBaseFormatException("Some digits of number is more than its base");
+            }
+        }
     }
 
     public String getBase() {
@@ -97,7 +108,7 @@ public class BaseNumber {
     }
 
     public void setBase(String base) {
-        this.base = base;
+        this.convertToBase(base);
     }
 }
 
