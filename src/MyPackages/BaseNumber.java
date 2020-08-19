@@ -1,5 +1,7 @@
 package MyPackages;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -9,6 +11,7 @@ public class BaseNumber {
 
     private String number;
     private String base;
+    private HashMap<Character, Integer> hashMap = new HashMap<Character, Integer>() {{put('0', 0);put('1', 1);put('2', 2);put('3', 3);put('4', 4);put('5', 5);put('6', 6);put('7', 7);put('8', 8);put('9', 9);put('A', 10);put('B', 11);put('C', 12);put('D', 13);put('E', 14);put('F', 15);}};
 
     /**
      *
@@ -21,8 +24,10 @@ public class BaseNumber {
         this.base = base;
 
         for(int i = 0 ; i < number.length() ; i++){
-            if (Character.getNumericValue(number.charAt(i)) >= Integer.parseInt(base)){
-                throw new WrongBaseFormatException("Please change number or its base.");
+            /*if (Character.getNumericValue(number.charAt(i)) >= Integer.parseInt(base)){
+                throw new WrongBaseFormatException("Please change number or its base.");*/
+            if( hashMap.get(number.charAt(i)) >= Integer.parseInt(base)){
+                throw new WrongBaseFormatException("Some digits of number is more than its base");
             }
         }
     }
@@ -39,7 +44,8 @@ public class BaseNumber {
         int sum = 0;
 
         for (int i = number.length() - 1 ; i >= 0 ; i--){
-            sum += Character.getNumericValue(number.charAt(i)) * Math.pow(Integer.parseInt(base), number.length() -1 - i);
+           // sum += Character.getNumericValue(number.charAt(i)) * Math.pow(Integer.parseInt(base), number.length() -1 - i);
+            sum += hashMap.get(number.charAt(i)) * Math.pow(Integer.parseInt(base), number.length() - 1 - i);
         }
         this.number = String.valueOf(sum);
         this.base = String.valueOf(10);
@@ -55,10 +61,16 @@ public class BaseNumber {
     public String convertToBase(String base){
         int baseOfNumber = Integer.valueOf(base);
         int number = Integer.parseInt(convertToBaseTen());
-        Stack<String> stack = new Stack<>();
+        //Stack<String> stack = new Stack<>();
+        Stack<Character> stack = new Stack<>();
 
         while(number != 0) {
-            stack.push(String.valueOf(number % baseOfNumber));
+            //stack.push(String.valueOf(number % baseOfNumber));
+            for (Map.Entry<Character, Integer> entry : hashMap.entrySet()) {
+                if (entry.getValue() == number % baseOfNumber) {
+                    stack.push(entry.getKey());
+                }
+            }
             number = number / baseOfNumber;
         }
 
@@ -104,6 +116,8 @@ class WrongBaseFormatException extends Exception{
 
     @Override
     public String toString(){
-        return (!(this.getMessage() == null))? "The input number is grater than its base" + ": " + this.getMessage(): "The input number is grater than its base";
+        String text = "Wrong format of inout numbers";
+        return (!(this.getMessage() == null))? text + ": " + this.getMessage(): text;
     }
 }
+
