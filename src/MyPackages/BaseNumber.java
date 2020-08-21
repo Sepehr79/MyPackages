@@ -11,33 +11,38 @@ public class BaseNumber {
 
     private String number;
     private String base;
-    private HashMap<Character, Integer> hashMap = new HashMap<Character, Integer>() {{put('0', 0);put('1', 1);put('2', 2);put('3', 3);put('4', 4);put('5', 5);put('6', 6);put('7', 7);put('8', 8);put('9', 9);put('A', 10);put('B', 11);put('C', 12);put('D', 13);put('E', 14);put('F', 15);}};
+    private final HashMap<Character, Integer> hashMap = new HashMap<Character, Integer>() {{put('0', 0);put('1', 1);
+    put('2', 2);put('3', 3);
+    put('4', 4);put('5', 5);
+    put('6', 6);put('7', 7);
+    put('8', 8);put('9', 9);
+    put('A', 10);put('B', 11);
+    put('C', 12);put('D', 13);
+    put('E', 14);put('F', 15);}};
 
     /**
-     *
-     * @param number
-     * @param base
      * @throws WrongBaseFormatException if base number is bigger than number.
      */
-    public BaseNumber(String number, String base) throws WrongBaseFormatException {
+    public BaseNumber(String number, String base){
         this.number = number;
         this.base = base;
 
-        if(number.matches(".*[a-zG-Z].*")){
-            throw new WrongBaseFormatException("wrong characters, valid characters are A to F");
-        }
-        for(int i = 0 ; i < number.length() ; i++){
-            if( hashMap.get(number.charAt(i)) >= Integer.parseInt(base)){
-                throw new WrongBaseFormatException("Some digits of number is more than its base");
-            }
+        try {
+            checkValidNumber(this.number);
+            checkValidBaseNumber(base);
+        } catch (WrongBaseFormatException e) {
+            e.printStackTrace();
         }
     }
-    public BaseNumber(String number) throws WrongBaseFormatException {
+
+    public BaseNumber(String number){
         this.number = number;
         this.base = "10";
 
-        if(number.matches(".*[a-zA-Z].*")){
-            throw new WrongBaseFormatException("for decimal numbers you should enter characters between 0 to 9");
+        try {
+            checkValidDecimalNumber(this.number);
+            } catch (WrongBaseFormatException wrongBaseFormatException) {
+            wrongBaseFormatException.printStackTrace();
         }
     }
 
@@ -60,10 +65,16 @@ public class BaseNumber {
     /**
      *
      * @param base new base of number.
-     * @return number at base you want.
      */
-    public String convertToBase(String base){
-        int baseOfNumber = Integer.valueOf(base);
+    public void convertToBase(String base){
+        try {
+            checkValidBaseNumber(base);
+        } catch (WrongBaseFormatException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        int baseOfNumber = Integer.parseInt(base);
         int number = Integer.parseInt(convertToBaseTen());
         Stack<Character> stack = new Stack<>();
 
@@ -81,8 +92,6 @@ public class BaseNumber {
             this.number += stack.pop();
         }
         this.base = String.valueOf(baseOfNumber);
-
-        return this.number;
     }
 
     //getters and setters
@@ -93,6 +102,20 @@ public class BaseNumber {
     public void setNumber(String number) throws WrongBaseFormatException {
         this.number = number;
 
+        checkValidNumber(this.number);
+    }
+
+    public String getBase() {
+        return base;
+    }
+
+    public void setBase(String base) {
+        this.convertToBase(base);
+    }
+
+
+    //Method for making exceptions
+    private void checkValidNumber(String number) throws WrongBaseFormatException {
         if(number.matches(".*[a-zG-Z].*")){
             throw new WrongBaseFormatException("wrong characters, valid characters are A to F");
         }
@@ -103,12 +126,15 @@ public class BaseNumber {
         }
     }
 
-    public String getBase() {
-        return base;
+    private void checkValidDecimalNumber(String number) throws WrongBaseFormatException {
+        if (number.matches(".*[a-zA-Z].*"))
+            throw new WrongBaseFormatException("for decimal numbers you should enter characters between 0 to 9");
     }
 
-    public void setBase(String base) {
-        this.convertToBase(base);
+    private void checkValidBaseNumber(String base) throws WrongBaseFormatException {
+        if (base.matches(".*[^0-9].*") || Integer.parseInt(base) > 16){
+            throw new WrongBaseFormatException("Base number must be less than 17 and only with number characters");
+        }
     }
 }
 
@@ -118,7 +144,7 @@ public class BaseNumber {
  */
 class WrongBaseFormatException extends Exception{
 
-    public  WrongBaseFormatException(){
+    public WrongBaseFormatException(){
         super();
     }
     public WrongBaseFormatException(String message){
@@ -127,7 +153,7 @@ class WrongBaseFormatException extends Exception{
 
     @Override
     public String toString(){
-        String text = "Wrong format of inout numbers";
+        String text = "Wrong format of input numbers";
         return (!(this.getMessage() == null))? text + ": " + this.getMessage(): text;
     }
 }
