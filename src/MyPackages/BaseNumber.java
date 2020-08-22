@@ -6,8 +6,9 @@ import java.util.Stack;
 
 /**
  *working with number at different bases
+ * @author Sepehr79
  */
-public class BaseNumber {
+public class BaseNumber{
 
     private String number;
     private String base;
@@ -136,25 +137,27 @@ public class BaseNumber {
             throw new WrongBaseFormatException("Base number must be less than 17 and only with number characters");
         }
     }
-}
 
 
-/**
- * our Exception to control inputs at
- */
-class WrongBaseFormatException extends Exception{
-
-    public WrongBaseFormatException(){
-        super();
-    }
-    public WrongBaseFormatException(String message){
-        super(message);
-    }
-
-    @Override
-    public String toString(){
-        String text = "Wrong format of input numbers";
-        return (!(this.getMessage() == null))? text + ": " + this.getMessage(): text;
+    /**
+     * our Exception to control inputs at
+     */
+    static class WrongBaseFormatException extends Exception{
+        public WrongBaseFormatException(){
+            super();
+        }
+        public WrongBaseFormatException(String message){
+            super(message);
+        }
+        @Override
+        public String toString(){
+            String text = "Wrong format of input numbers";
+            return (!(this.getMessage() == null))? text + ": " + this.getMessage(): text;
+        }
     }
 }
+
+
+
+
 
