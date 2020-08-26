@@ -1,4 +1,4 @@
-package MyPackages;
+package Main;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,12 +67,12 @@ public class BaseNumber{
      *
      * @param base new base of number.
      */
-    public void convertToBase(String base){
+    public String convertToBase(String base){
         try {
             checkValidBaseNumber(base);
         } catch (WrongBaseFormatException e) {
             e.printStackTrace();
-            return;
+            return "";
         }
 
         int baseOfNumber = Integer.parseInt(base);
@@ -93,6 +93,7 @@ public class BaseNumber{
             this.number += stack.pop();
         }
         this.base = String.valueOf(baseOfNumber);
+        return this.number;
     }
 
     //getters and setters
@@ -133,7 +134,7 @@ public class BaseNumber{
     }
 
     private void checkValidBaseNumber(String base) throws WrongBaseFormatException {
-        if (base.matches(".*[^0-9].*") || Integer.parseInt(base) > 16){
+        if (base.matches(".*[^0-9].*") || (Integer.parseInt(base) > 16 && Integer.parseInt(base) > 1)){
             throw new WrongBaseFormatException("Base number must be less than 17 and only with number characters");
         }
     }
