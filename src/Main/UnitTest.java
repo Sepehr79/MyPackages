@@ -1,5 +1,6 @@
 package Main;
 
+import MyPackages.BaseNumber;
 import org.junit.*;
 import static org.junit.Assert.*;
 

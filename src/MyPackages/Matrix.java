@@ -88,7 +88,7 @@ public class Matrix {
         return yLength;
     }
 
-    //overrided methods
+    //override methods
     public String toString(){
         String matrix = "";
 
