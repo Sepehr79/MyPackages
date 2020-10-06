@@ -143,7 +143,7 @@ public class BaseNumber{
     /**
      * our Exception to control inputs at
      */
-    static class WrongBaseFormatException extends Exception{
+    public static class WrongBaseFormatException extends Exception{
         public WrongBaseFormatException(){
             super();
         }
