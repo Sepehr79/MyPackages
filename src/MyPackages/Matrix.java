@@ -7,8 +7,8 @@ public class Matrix {
 
     public int[][] table;
 
-    private int xLength;
-    private int yLength;
+    private final int xLength;
+    private final int yLength;
 
     //Constructors
     public Matrix(int size){
@@ -90,15 +90,15 @@ public class Matrix {
 
     //override methods
     public String toString(){
-        String matrix = "";
+        StringBuilder matrix = new StringBuilder();
 
         for(int i = 0 ; i < this.getxLength(); i++){
             for(int j = 0; j < this.getyLength(); j++){
-                matrix += this.table[i][j] + " ";
+                matrix.append(this.table[i][j]).append(" ");
             }
-            matrix += "\n";
+            matrix.append("\n");
         }
 
-        return matrix;
+        return matrix.toString();
     }
 }
