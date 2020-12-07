@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
- *working with number at different bases
+ * working with number at different bases
  * @author Sepehr79
  */
 public class BaseNumber{
