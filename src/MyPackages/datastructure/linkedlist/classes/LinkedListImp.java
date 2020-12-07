@@ -25,10 +25,8 @@ public class LinkedListImp<DataType> implements IList<DataType>, Iterable<NodeIm
 
     @Override
     public void insert_after(DataType data, DataType x) {
-        Iterator<NodeImp<DataType>> iterator = this.iterator();
-        while (iterator.hasNext()){
-            NodeImp<DataType> nodeImp = iterator.next();
-            if (nodeImp.get_value().equals(data)){
+        for (NodeImp<DataType> nodeImp : this) {
+            if (nodeImp.get_value().equals(data)) {
                 insertAfterNodeWithData(nodeImp, x);
                 return;
             }
