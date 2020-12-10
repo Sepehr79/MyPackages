@@ -4,9 +4,16 @@ import MyPackages.datastructure.linkedlist.interfaces.IList;
 
 import java.util.Iterator;
 
-
+/**
+ * Implementing a linkedlist in java without import any libraries
+ * @class LinkedListImp implements linkedlist in java it can be used as generic data types.
+ * @author Sepehr79
+ */
 public class LinkedListImp<DataType> implements IList<DataType>, Iterable<NodeImp<DataType>> {
 
+    /**
+     * To save first and last node of each linkedlist
+     */
     private final NodeImp<DataType> firstNode;
     private NodeImp<DataType> lastNode;
 
@@ -23,6 +30,11 @@ public class LinkedListImp<DataType> implements IList<DataType>, Iterable<NodeIm
         size++;
     }
 
+    /**
+     *
+     * @param data is one of the linkedlist data's we are looking for
+     * @param x to insert a new value after all data's in linked list
+     */
     @Override
     public void insert_after(DataType data, DataType x) {
         for (NodeImp<DataType> nodeImp : this) {
@@ -58,6 +70,12 @@ public class LinkedListImp<DataType> implements IList<DataType>, Iterable<NodeIm
         return null;
     }
 
+    /**
+     *
+     * @param index of linkedlist
+     * @return a value from linkedlist based on its generic type
+     * @throws IllegalArgumentException if index is more than size
+     */
     @Override
     public DataType get(int index) {
         Iterator<NodeImp<DataType>> iterator = iterator();
@@ -104,6 +122,9 @@ public class LinkedListImp<DataType> implements IList<DataType>, Iterable<NodeIm
         nodeImp.set_next(newNode);
     }
 
+    /**
+     * Implementing linkedlist iterator
+     */
     @Override
     public Iterator<NodeImp<DataType>> iterator() {
         return new Iterator<NodeImp<DataType>>() {

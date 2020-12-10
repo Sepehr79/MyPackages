@@ -1,5 +1,8 @@
 package MyPackages.datastructure.linkedlist.interfaces;
 
+/**
+ * how to do instead of what to do.
+ */
 public interface IList<DataType> {
 
     void insert(DataType data);
