@@ -28,24 +28,50 @@ public class LinkedListImp<DataType> implements IList<DataType>, Iterable<NodeIm
         for (NodeImp<DataType> nodeImp : this) {
             if (nodeImp.get_value().equals(data)) {
                 insertAfterNodeWithData(nodeImp, x);
-                return;
+                size++;
             }
         }
     }
 
     @Override
     public DataType delete(DataType data) {
+        for (NodeImp<DataType> nodeImp : this) {
+            if (nodeImp.get_value().equals(data)) {
+                nodeImp.get_prev().set_next(nodeImp.get_next());
+                nodeImp.get_next().set_prev(nodeImp.get_prev());
+
+                size--;
+
+                return nodeImp.get_value();
+            }
+        }
         return null;
     }
 
     @Override
     public DataType find(DataType data) {
+        for (NodeImp<DataType> nodeImp : this) {
+            if (nodeImp.get_value().equals(data)) {
+                return nodeImp.get_value();
+            }
+        }
         return null;
     }
 
     @Override
     public DataType get(int index) {
-        return null;
+        Iterator<NodeImp<DataType>> iterator = iterator();
+        NodeImp<DataType> nodeImp = null;
+        int counter = 0;
+        while (counter < index){
+            nodeImp = iterator.next();
+            counter++;
+        }
+
+        if (nodeImp != null) {
+            return nodeImp.get_value();
+        }
+        throw new IllegalArgumentException("Arg is more than size!");
     }
 
     @Override

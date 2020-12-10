@@ -63,4 +63,30 @@ public class TestNode {
         System.out.println("iterator start");
         for (NodeImp<Integer> integerNodeImp : linkedListImp) System.out.println(integerNodeImp.get_value());
     }
+
+    @Test
+    public void testGetIndex(){
+        LinkedListImp<Integer> linkedListImp = new LinkedListImp<>();
+        linkedListImp.insert(1);
+        linkedListImp.insert(3);
+        linkedListImp.insert(4);
+        linkedListImp.insert(6);
+
+        Integer num = linkedListImp.get(4);
+        Assert.assertEquals(6, (int) num);
+    }
+
+    @Test
+    public void testDelete(){
+        LinkedListImp<Integer> linkedListImp = new LinkedListImp<>();
+        linkedListImp.insert(1);
+        linkedListImp.insert(3);
+        linkedListImp.insert(4);
+        linkedListImp.insert(6);
+
+        Integer num = linkedListImp.delete(4);
+        Assert.assertEquals(3, linkedListImp.size());
+        Assert.assertEquals(4, (int) num);
+        Assert.assertEquals(6, (int) linkedListImp.get(3));
+    }
 }

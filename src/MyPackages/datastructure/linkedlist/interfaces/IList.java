@@ -15,5 +15,4 @@ public interface IList<DataType> {
     int size();
 
     boolean is_empty();
-
 }
