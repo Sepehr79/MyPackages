@@ -69,16 +69,14 @@ public class BaseNumber{
      *
      * @param base new base of number.
      */
-    public String convertToBase(String base){
-        try {
-            checkValidBaseNumber(base);
-        } catch (WrongBaseFormatException e) {
-            e.printStackTrace();
-            return "";
-        }
+    public String convertToBase(String base) throws WrongBaseFormatException {
+        checkValidBaseNumber(base);
 
+        //convert String to integer
         int baseOfNumber = Integer.parseInt(base);
         int number = Integer.parseInt(convertToBaseTen());
+
+        //stack to save keys of map
         Stack<Character> stack = new Stack<>();
 
         while(number != 0) {
@@ -90,6 +88,7 @@ public class BaseNumber{
             number = number / baseOfNumber;
         }
 
+        // pop stack numbers to this.number
         this.number = "";
         while (!stack.isEmpty()){
             this.number += stack.pop();
@@ -113,7 +112,7 @@ public class BaseNumber{
         return base;
     }
 
-    public void setBase(String base) {
+    public void setBase(String base) throws WrongBaseFormatException {
         this.convertToBase(base);
     }
 

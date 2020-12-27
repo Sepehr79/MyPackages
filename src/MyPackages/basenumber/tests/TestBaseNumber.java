@@ -8,6 +8,8 @@ public class TestBaseNumber {
     static BaseNumber binaryNumber;
     static BaseNumber octalNumber;
     static BaseNumber hexDecimalNumber;
+
+    static BaseNumber example;
     @BeforeClass
     public static void makeValues(){
         try {
@@ -19,7 +21,7 @@ public class TestBaseNumber {
         }
     }
     @Test
-    public void testEquals(){
+    public void testEquals() throws BaseNumber.WrongBaseFormatException {
         //from another base to base ten
         assertEquals(binaryNumber.convertToBaseTen(), "2");
         assertEquals(octalNumber.convertToBaseTen(), "9");
@@ -40,5 +42,12 @@ public class TestBaseNumber {
             e.printStackTrace();
             Assert.assertTrue(e instanceof BaseNumber.WrongBaseFormatException);
         }
+
+    }
+
+    @Test
+    public void testExample() throws BaseNumber.WrongBaseFormatException {
+        example = new BaseNumber("B", "16");
+        Assert.assertEquals(example.convertToBase("2"), "1011");
     }
 }
