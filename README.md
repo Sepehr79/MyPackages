@@ -1,10 +1,10 @@
 # MyPackages
 
-### Algorithms
+### 1. Algorithms
 
 simple algorithms implemented in java
 
-### BaseNumber
+### 2. BaseNumber
 
 convert numbers with different bases
 
@@ -15,10 +15,10 @@ convert numbers with different bases
 ```
 this class works only for numbers with base between 1 , 16 It is not a decimal
 
-### DataStructure
+### 3. DataStructure
 
 implemented a linkedlist in java
 
-### Matrix
+### 4. Matrix
 
 implemented a matrix in java
