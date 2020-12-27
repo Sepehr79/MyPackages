@@ -1,18 +1,22 @@
-package Main;
+package MyPackages.basenumber.tests;
 
-import MyPackages.BaseNumber;
+import MyPackages.basenumber.classes.BaseNumber;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-public class UnitTest {
+public class TestBaseNumber {
     static BaseNumber binaryNumber;
     static BaseNumber octalNumber;
     static BaseNumber hexDecimalNumber;
     @BeforeClass
     public static void makeValues(){
-        binaryNumber = new BaseNumber("10", "2");
-        octalNumber = new BaseNumber("11", "8");
-        hexDecimalNumber = new BaseNumber("A", "16");
+        try {
+            binaryNumber = new BaseNumber("10", "2");
+            octalNumber = new BaseNumber("11", "8");
+            hexDecimalNumber = new BaseNumber("A", "16");
+        } catch (BaseNumber.WrongBaseFormatException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     public void testEquals(){
@@ -33,7 +37,8 @@ public class UnitTest {
             octalNumber.convertToBase("A");
             hexDecimalNumber.convertToBase("wdejlijfewl");
         }catch (Exception e){
-            assertTrue(e instanceof BaseNumber.WrongBaseFormatException);
+            e.printStackTrace();
+            Assert.assertTrue(e instanceof BaseNumber.WrongBaseFormatException);
         }
     }
 }

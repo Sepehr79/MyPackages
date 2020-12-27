@@ -1,4 +1,4 @@
-package MyPackages;
+package MyPackages.basenumber.classes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,39 +12,41 @@ public class BaseNumber{
 
     private String number;
     private String base;
-    private final HashMap<Character, Integer> hashMap = new HashMap<Character, Integer>() {{put('0', 0);put('1', 1);
+    private final HashMap<Character, Integer> hashMap = new HashMap<Character, Integer>() {{
+    put('0', 0);put('1', 1);
     put('2', 2);put('3', 3);
     put('4', 4);put('5', 5);
     put('6', 6);put('7', 7);
     put('8', 8);put('9', 9);
     put('A', 10);put('B', 11);
     put('C', 12);put('D', 13);
-    put('E', 14);put('F', 15);}};
+    put('E', 14);put('F', 15);
+    }};
 
     /**
+     * Constructor
+     * @param number input number in every base.
+     * @param  base base of number it should between 1 and 17.
      * @throws WrongBaseFormatException if base number is bigger than number.
      */
-    public BaseNumber(String number, String base){
+    public BaseNumber(String number, String base) throws WrongBaseFormatException {
         this.number = number;
         this.base = base;
 
-        try {
-            checkValidNumber(this.number);
-            checkValidBaseNumber(base);
-        } catch (WrongBaseFormatException e) {
-            e.printStackTrace();
-        }
+        checkValidNumber(this.number);
+        checkValidBaseNumber(base);
     }
 
-    public BaseNumber(String number){
+    /**
+     *
+     * @param number input number in base 10.
+     * @throws WrongBaseFormatException
+     * */
+    public BaseNumber(String number) throws WrongBaseFormatException {
         this.number = number;
         this.base = "10";
 
-        try {
-            checkValidDecimalNumber(this.number);
-            } catch (WrongBaseFormatException wrongBaseFormatException) {
-            wrongBaseFormatException.printStackTrace();
-        }
+        checkValidDecimalNumber(this.number);
     }
 
     /**
@@ -134,7 +136,7 @@ public class BaseNumber{
     }
 
     private void checkValidBaseNumber(String base) throws WrongBaseFormatException {
-        if (base.matches(".*[^0-9].*") || (Integer.parseInt(base) > 16 && Integer.parseInt(base) > 1)){
+        if (base.matches(".*[^0-9].*") || (Integer.parseInt(base) > 16 && Integer.parseInt(base) < 2)){
             throw new WrongBaseFormatException("Base number must be less than 17 and only with number characters");
         }
     }

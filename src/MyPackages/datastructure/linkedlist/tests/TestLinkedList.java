@@ -1,14 +1,11 @@
-package Main;
+package MyPackages.datastructure.linkedlist.tests;
 
 import MyPackages.datastructure.linkedlist.classes.LinkedListImp;
 import MyPackages.datastructure.linkedlist.classes.NodeImp;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.Iterator;
-
-public class TestNode {
+public class TestLinkedList {
 
     @Test
     public void testNodeValue(){

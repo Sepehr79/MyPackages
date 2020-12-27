@@ -1,7 +1,7 @@
-package Main;
+package MyPackages.algorithms.tests;
 
 import org.junit.Assert;
-import MyPackages.Algorithms;
+import MyPackages.algorithms.classes.Algorithms;
 
 public class TestAlgorithms {
     @org.junit.Test

@@ -1,4 +1,4 @@
-package MyPackages;
+package MyPackages.matrix.classes;
 
 /**
  * working with matrix
