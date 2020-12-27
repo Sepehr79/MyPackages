@@ -8,7 +8,7 @@ simple algorithms implemented in java
 
 convert numbers with different bases
 
-####example
+**example**
 ```
     BaseNumber hexadecimal = new BaseNumber("B", "16");
     System.out.println(hexadecimal.convertToBase("2")); // prints 1011
