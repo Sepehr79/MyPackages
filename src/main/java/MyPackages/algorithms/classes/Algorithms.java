@@ -3,6 +3,10 @@ package MyPackages.algorithms.classes;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Simple algorithms in java
+ * @author Sepehr79
+ */
 public class Algorithms {
 
     private Algorithms() {}
@@ -52,7 +56,10 @@ public class Algorithms {
 
     }
 
-    // gets arraylist of prime numbers less and equals than input
+    /**
+     *  gets arraylist of prime numbers less and equals than input
+     *
+     */
     public static ArrayList<Integer> getPrimeNumbers(int num){
         int counter = 0;
         ArrayList<Integer> primeNumbers = new ArrayList<>();
@@ -70,7 +77,10 @@ public class Algorithms {
         return primeNumbers;
     }
 
-    // get primes of input with their powers and push them into the hashmap
+    /**
+     * get primes of input with their powers and push them into the hashmap
+     * @return a hash map that key is number and value is its power
+     */
     public static HashMap<Integer, Integer> getPrimeStructure(int num){
         int primeNumber = 2, counter = 0, i = 0;
         HashMap<Integer, Integer> primeStructure = new HashMap<>();
@@ -90,7 +100,10 @@ public class Algorithms {
         return primeStructure;
     }
 
-    // identify that input is prime or not
+    /**
+     * identify that input is prime or not
+     * @return true if input is a prime number
+     */
     public static boolean isPrime(int num){
         int counter = 0;
         for (int i = 1; i <= num; i++){
@@ -98,10 +111,6 @@ public class Algorithms {
                 counter++;
         }
         return counter == 2;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getPrimeNumbers(100));
     }
 
     private static int getMax(int... arr){
@@ -112,6 +121,7 @@ public class Algorithms {
         }
         return max;
     }
+
     private static int getMin(int ...arr){
         int min = arr[0];
         for (int i = 1; i < arr.length; i++) {
@@ -120,4 +130,5 @@ public class Algorithms {
         }
         return min;
     }
+
 }

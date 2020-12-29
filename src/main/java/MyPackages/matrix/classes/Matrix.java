@@ -2,6 +2,7 @@ package MyPackages.matrix.classes;
 
 /**
  * working with matrix
+ * @author Sepehr79
  */
 public class Matrix {
 
@@ -49,15 +50,15 @@ public class Matrix {
 
         if(matrix.xLength == 2 && matrix.yLength == 2){
             det = matrix.table[0][0] * matrix.table[1][1] - matrix.table[0][1] * matrix.table[1][0];
+            return det;
         }
         else if(matrix.xLength == 3 && matrix.yLength == 3){
             for(int i=0;i<3;i++)
                 det = det + (matrix.table[0][i]*(matrix.table[1][(i+1)%3]*matrix.table[2][(i+2)%3] - matrix.table[1][(i+2)%3]*matrix.table[2][(i+1)%3]));
+
+            return det;
         }
-        else{
-            throw new Exception("cant calculate determine of big matrix");
-        }
-        return det;
+        throw new Exception("cant calculate determine of big matrix");
     }
 
     public static Matrix getMultiplication(Matrix matrix1, Matrix matrix2) throws Exception{
@@ -66,9 +67,9 @@ public class Matrix {
 
         Matrix ans = new Matrix(matrix1.xLength, matrix2.yLength);
 
-        //algorithm for multiply matrixes.............
-        for(int i=0;i<ans.getxLength();i++){
-            for(int j=0;j<ans.getyLength();j++){
+        //algorithm for multiply matrices.............
+        for(int i=0;i<ans.getXLength();i++){
+            for(int j=0;j<ans.getYLength();j++){
                 ans.table[i][j]=0;
                 for(int k=0;k<matrix1.yLength;k++){
                     ans.table[i][j]+=matrix1.table[i][k]*matrix2.table[k][j];
@@ -80,11 +81,11 @@ public class Matrix {
     }
 
     //getters
-    public int getxLength() {
+    public int getXLength() {
         return xLength;
     }
 
-    public int getyLength() {
+    public int getYLength() {
         return yLength;
     }
 
@@ -92,8 +93,8 @@ public class Matrix {
     public String toString(){
         StringBuilder matrix = new StringBuilder();
 
-        for(int i = 0 ; i < this.getxLength(); i++){
-            for(int j = 0; j < this.getyLength(); j++){
+        for(int i = 0 ; i < this.getXLength(); i++){
+            for(int j = 0; j < this.getYLength(); j++){
                 matrix.append(this.table[i][j]).append(" ");
             }
             matrix.append("\n");
